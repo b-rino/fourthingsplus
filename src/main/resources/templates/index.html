@@ -11,7 +11,17 @@
 
 <h1>Welcome to Fourthingsplus!</h1>
 
-<p>Add your tasks</p>
+<p>Please log in:</p>
+
+<form method="post">
+    <!--Attributterne name = "username" og name = "password" sende med videre i formparametre, og skal bruge i vores UserController class -->
+    <input type="text" name="username" placeholder="Enter your username"/> <!-- placeholder er tekst der står i username feltet, og forsvinder ved første indtastning-->
+    <input type="password" name="password" placeholder="Enter your password"/> <!-- samme som ovenover, med tilføjelse af at indtastning bliver hemmeligholdt! -->
+
+    <button type="submit" formaction="/login">Login</button>
+
+    <div><p th:text="${message}"></p></div>
+</form>
 
 </body>
 </html>
