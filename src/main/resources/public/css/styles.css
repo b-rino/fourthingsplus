@@ -1,7 +1,47 @@
-/* Stylesheet for the application */
+/* Stylesheet for the application */  /*  */
 
 h1 {
     color: #369;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 3rem;
+}
+
+/* Index styles */
+header{
+    margin-bottom: 30px;
+}
+
+.login-form input[type="text"], .login-form input[type=password]{
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+.login-form button {
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    background-color: darkgreen;
+    color: white;
+}
+
+.login-form button:hover{
+    background-color: lightgreen;
+}
+
+
+/* Task styles */
+.task-table{
+    border-collapse: collapse; /* Vi laver border imellem hvert felt senere, og derfor vil der komme dobbelt nogle steder hvis denne ikke er væk */
+    font-size: 1.2rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.task-table td, .task-table th{
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.task-table tr:nth-child(even){ /*  hver anden række grå*/
+    background-color: silver;
 }

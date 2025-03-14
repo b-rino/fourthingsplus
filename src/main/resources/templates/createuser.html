@@ -17,9 +17,10 @@
 <form class="login-form" method="post">
     <!--Attributterne name = "username" og name = "password" sende med videre i formparametre, og skal bruge i vores UserController class -->
     <input type="text" name="username" placeholder="Enter your username"/> <!-- placeholder er tekst der står i username feltet, og forsvinder ved første indtastning-->
-    <input type="password" name="password" placeholder="Enter your password"/> <!-- samme som ovenover, med tilføjelse af at indtastning bliver hemmeligholdt! -->
+    <input type="password" name="password1" placeholder="Enter your password"/> <!-- samme som ovenover, med tilføjelse af at indtastning bliver hemmeligholdt! -->
+    <input type="password" name="password2" placeholder="Enter your password again"/>
 
-    <button type="submit" formaction="/login">Get access to my mind</button>
+    <button type="submit" formaction="/createuser">Create user</button>
 
     <div><p th:text="${message}"></p></div>
 </form>

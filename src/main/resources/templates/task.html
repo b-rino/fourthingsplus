@@ -9,13 +9,17 @@
 
 <body>
 
+<header>
+    <a href="index.html" th:href="@{/}"> <!-- billede bliver sat ind i midten af et <a> tag, som indeholder et link til forsiden! dvs når du trykker ryger du til forside! -->
+        <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}" width="35%"/>
+    </a>
+</header>
+
 <h1>Welcome, <span th:text="${session.currentUser.username}"></span></h1> <!-- dette virker pga ctx.sessionAttribute i UserController! -->
 
-<h2>Your tasks: </h2>
+<h2>Doing</h2>
 
-Her er de...
-
-<table>
+<table class="task-table">
     <thead>
     <tr>
         <th>Item</th>
@@ -29,6 +33,10 @@ Her er de...
     </tr>
     </tbody>
 </table>
+
+<p th:if="${session.currentUser != null}">  <!-- if-statement i html -->
+    <a href="index.html" th:href="@{/logout}">Logout</a>
+</p> <!-- thymeleaf delen gør at den kommer ind forbi den route der hedder logout, som sletter credentials -->
 
 </body>
 </html>
