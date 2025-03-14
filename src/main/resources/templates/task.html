@@ -17,6 +17,11 @@
 
 <h1>Welcome, <span th:text="${session.currentUser.username}"></span></h1> <!-- dette virker pga ctx.sessionAttribute i UserController! -->
 
+<form class ="generic-form" method="post">
+    <input class="input-large" type="text" name="taskname" placeholder="Enter your task here"/>
+    <button type="submit" formaction="addtask">Add</button>
+</form>
+
 <h2>Doing</h2>
 
 <table class="task-table">

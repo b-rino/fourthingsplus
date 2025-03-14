@@ -6,17 +6,13 @@ h1 {
     font-size: 3rem;
 }
 
-/* Index styles */
 header{
     margin-bottom: 30px;
 }
 
-.login-form input[type="text"], .login-form input[type=password]{
-    padding: 10px;
-    font-size: 1.2rem;
-}
+/* General form styles */
 
-.login-form button {
+.generic-form button {
     padding: 10px;
     font-size: 1.2rem;
     border-radius: 5px;
@@ -24,9 +20,21 @@ header{
     color: white;
 }
 
-.login-form button:hover{
+.generic-form button:hover{
     background-color: lightgreen;
 }
+
+.generic-form input[type="text"], .generic-form input[type=password]{
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+.input-large{
+    width: 250px;
+}
+
+/* Index styles */
+
 
 
 /* Task styles */
