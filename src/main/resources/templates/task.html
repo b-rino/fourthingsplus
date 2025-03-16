@@ -39,7 +39,7 @@
             <td th:text="${task.name}"></td>
             <td>
                 <button type="submit" name="taskId" th:value="${task.taskid}" formaction="done">Done</button>
-                <button type="submit">Edit</button>
+                <button type="submit" name="taskId" th:value="${task.taskid}" formaction="edittask">Edit</button>
             </td>
         </tr>
         </tbody>
@@ -61,7 +61,6 @@
             <td th:text="${task.name}"></td>
             <td>
                 <button type="submit" name="taskId" th:value="${task.taskid}" formaction="undo">Undo</button>
-                <button type="submit">Edit</button>
                 <button type="submit" name="taskId" th:value="${task.taskid}" formaction="deletetask">Delete</button>
             </td>
         </tr>

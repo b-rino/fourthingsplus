@@ -7,6 +7,7 @@ import app.persistence.ConnectionPool;
 import app.persistence.TaskMapper;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -17,8 +18,36 @@ public class TaskController {
         app.post("done", ctx -> done(ctx, true, connectionPool));
         app.post("undo", ctx -> done(ctx, false, connectionPool));
         app.post("deletetask", ctx -> deletetask(ctx, connectionPool));
-
+        app.post("edittask", ctx -> edittask(ctx, connectionPool));
+        app.post("updatetask", ctx -> updatetask(ctx, connectionPool));
     }
+
+    private static void updatetask(@NotNull Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+            int taskId = Integer.parseInt(ctx.formParam("taskId"));
+            Task taskName = ctx.formParam("taskname");
+            ctx.attribute("task", task);
+            ctx.render("edittask.html");
+        }  catch (DatabaseException | NumberFormatException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("index.html");
+        }
+    }
+
+    private static void edittask(Context ctx, ConnectionPool connectionPool) {
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+            int taskId = Integer.parseInt(ctx.formParam("taskId"));
+            Task task = TaskMapper.getTaskById(taskId, connectionPool);
+            ctx.attribute("task", task);
+            ctx.render("edittask.html");
+        }  catch (DatabaseException | NumberFormatException e) {
+            ctx.attribute("message", e.getMessage());
+            ctx.render("index.html");
+        }
+    }
+
 
     private static void deletetask(Context ctx, ConnectionPool connectionPool) {
         User user = ctx.sessionAttribute("currentUser");

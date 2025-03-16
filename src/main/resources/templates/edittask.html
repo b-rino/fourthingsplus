@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<title>Fourthingsplus</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="../public/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<header>
+<a href="index.html" th:href="@{/}"> <!-- billede bliver sat ind i midten af et <a> tag, som indeholder et link til forsiden! dvs når du trykker ryger du til forside! -->
+    <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}" width="35%"/>
+</a>
+</header>
+
+<form class="generic-form" method="post">
+    <!--Attributterne name = "username" og name = "password" sende med videre i formparametre, og skal bruge i vores UserController class -->
+    <input type="text" name="taskname" th:value="${task.name}"/>
+    <button type="submit" name="taskId" th:value="${task.taskid}" formaction="/updatetask">Update</button>
+
+</form>
+
+</body>
+</html>
+
