@@ -1,19 +1,25 @@
 /* Stylesheet for the application */  /*  */
+
+/* Fjerner den enkelte browser default padding (ellers kan det se forskelligt ud fra browser til browser) */
+html * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid red;
-
 }
 
 .page{
+    padding: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 800px;
     min-height: 600px;
-    border: 1px solid blue;
 }
 
 h1 {
@@ -23,7 +29,7 @@ h1 {
 }
 
 header{
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 header a{
