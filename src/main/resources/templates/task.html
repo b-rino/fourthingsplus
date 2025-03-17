@@ -8,72 +8,77 @@
 </head>
 
 <body>
+<div class="page">
 
-<header>
-    <a href="index.html" th:href="@{/}">
-        <!-- billede bliver sat ind i midten af et <a> tag, som indeholder et link til forsiden! dvs når du trykker ryger du til forside! -->
-        <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}" width="35%"/>
-    </a>
-</header>
+    <header>
+        <a href="index.html" th:href="@{/}">
+            <!-- billede bliver sat ind i midten af et <a> tag, som indeholder et link til forsiden! dvs når du trykker ryger du til forside! -->
+            <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}"/>
+        </a>
+    </header>
 
-<h1>Welcome, <span th:text="${session.currentUser.username}"></span></h1>
-<!-- dette virker pga ctx.sessionAttribute i UserController! -->
+    <h1>Welcome, <span th:text="${session.currentUser.username}"></span></h1>
+    <!-- dette virker pga ctx.sessionAttribute i UserController! -->
 
-<form class="generic-form" method="post">
-    <input class="input-large" type="text" name="taskname" placeholder="Enter your task here"/>
-    <button type="submit" formaction="addtask">Add</button>
-</form>
+    <form class="generic-form" method="post">
+        <input class="input-large" type="text" name="taskname" placeholder="Enter your task here"/>
+        <button type="submit" formaction="addtask">Add</button>
+    </form>
 
-<h2>Doing</h2>
+    <h2>Doing</h2>
 
-<form method="post">
-    <table class="task-table">
-        <thead>
-        <tr>
-            <th>Item</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="task: ${taskList}" th:if="${not task.done}"> <!-- ligesom at lave en foreach loop - bare i html! -->
-            <td th:text="${task.name}"></td>
-            <td>
-                <button type="submit" name="taskId" th:value="${task.taskid}" formaction="done">Done</button>
-                <button type="submit" name="taskId" th:value="${task.taskid}" formaction="edittask">Edit</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
+    <form class="generic-form"  method="post">
+        <table class="task-table">
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task: ${taskList}" th:if="${not task.done}">
+                <!-- ligesom at lave en foreach loop - bare i html! -->
+                <td th:text="${task.name}"></td>
+                <td>
+                    <button type="submit" name="taskId" th:value="${task.taskid}" formaction="done">Done</button>
+                    <button type="submit" name="taskId" th:value="${task.taskid}" formaction="edittask">Edit</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
 
-<h2>Done</h2>
+    <h2>Done</h2>
 
-<form method="post">
-    <table class="task-table">
-        <thead>
-        <tr>
-            <th>Item</th>
-            <th>Action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="task: ${taskList}" th:if="${task.done}"> <!-- ligesom at lave en foreach loop - bare i html! -->
-            <td th:text="${task.name}"></td>
-            <td>
-                <button type="submit" name="taskId" th:value="${task.taskid}" formaction="undo">Undo</button>
-                <button type="submit" name="taskId" th:value="${task.taskid}" formaction="deletetask">Delete</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</form>
+    <form class="generic-form" method="post">
+        <table class="task-table">
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="task: ${taskList}" th:if="${task.done}"><!-- ligesom at lave en foreach loop - bare i html! -->
+                <td th:text="${task.name}"></td>
+                <td>
+                    <button type="submit" name="taskId" th:value="${task.taskid}" formaction="undo">Undo</button>
+                    <button type="submit" name="taskId" th:value="${task.taskid}" formaction="deletetask">Delete
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
 
-<div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
+    <!-- thymleaf function, der kun viser rød boks, hvis string "message" ikke er tom -->
+    <div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
 
-<p th:if="${session.currentUser != null}">  <!-- if-statement i html -->
-    <a href="index.html" th:href="@{/logout}">Logout</a>
-</p> <!-- thymeleaf delen gør at den kommer ind forbi den route der hedder logout, som sletter credentials -->
+    <p th:if="${session.currentUser != null}">  <!-- if-statement i html -->
+        <a href="index.html" th:href="@{/logout}">Logout</a>
+    </p> <!-- thymeleaf delen gør at den kommer ind forbi den route der hedder logout, som sletter credentials -->
 
+</div>
 </body>
 </html>
 

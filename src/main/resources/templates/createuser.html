@@ -10,11 +10,11 @@
 <body>
 <header>
 <a href="index.html" th:href="@{/}"> <!-- billede bliver sat ind i midten af et <a> tag, som indeholder et link til forsiden! dvs når du trykker ryger du til forside! -->
-    <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}" width="35%"/>
+    <img src="../public/images/fourthingsplus.png" th:src="@{/images/fourthingsplus.png}"/>
 </a>
 </header>
 
-<form class="login-form" method="post">
+<form class="generic-form" method="post">
     <!--Attributterne name = "username" og name = "password" sende med videre i formparametre, og skal bruge i vores UserController class -->
     <input type="text" name="username" placeholder="Enter your username"/> <!-- placeholder er tekst der står i username feltet, og forsvinder ved første indtastning-->
     <input type="password" name="password1" placeholder="Enter your password"/> <!-- samme som ovenover, med tilføjelse af at indtastning bliver hemmeligholdt! -->
@@ -25,12 +25,11 @@
     <div><p th:text="${message}"></p></div>
 </form>
 
-<div th:if="${session.currentUser != null}">  <!-- if-statement i html -->
-    <span th:text = "${session.currentUser.username}"></span> |
-    <a href="index.html" th:href="@{/logout}">Logout</a>
-</div>
 
-<p><a href="createuser.html" th:href="@{/createuser}">Create User</a></p>
+<div>
+    <!-- if-statement i html -->git 
+    <a th:if="${session.currentUser != null}" href="index.html" th:href="@{/logout}">Logout</a>
+</div>
 
 </body>
 </html>
