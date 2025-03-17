@@ -33,6 +33,13 @@ header{
     width: 250px;
 }
 
+.error{
+    border: 1px solid red;
+    padding: 10px;
+    color: red;
+    max-width: 400px;
+}
+
 /* Index styles */
 
 

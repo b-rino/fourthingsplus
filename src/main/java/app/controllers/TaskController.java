@@ -26,10 +26,12 @@ public class TaskController {
         User user = ctx.sessionAttribute("currentUser");
         try {
             int taskId = Integer.parseInt(ctx.formParam("taskId"));
-            Task taskName = ctx.formParam("taskname");
-            ctx.attribute("task", task);
-            ctx.render("edittask.html");
-        }  catch (DatabaseException | NumberFormatException e) {
+            String taskName = ctx.formParam("taskname");
+            TaskMapper.update(taskId, taskName, connectionPool);
+            List<Task> taskList = TaskMapper.getAllTasksPerUser(user.getUserId(), connectionPool);
+            ctx.attribute("taskList", taskList);
+            ctx.render("task.html");
+        } catch (DatabaseException | NumberFormatException e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
@@ -42,7 +44,7 @@ public class TaskController {
             Task task = TaskMapper.getTaskById(taskId, connectionPool);
             ctx.attribute("task", task);
             ctx.render("edittask.html");
-        }  catch (DatabaseException | NumberFormatException e) {
+        } catch (DatabaseException | NumberFormatException e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
@@ -57,7 +59,7 @@ public class TaskController {
             List<Task> taskList = TaskMapper.getAllTasksPerUser(user.getUserId(), connectionPool);
             ctx.attribute("taskList", taskList);
             ctx.render("task.html");
-        }  catch (DatabaseException | NumberFormatException e) {
+        } catch (DatabaseException | NumberFormatException e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
@@ -71,7 +73,7 @@ public class TaskController {
             List<Task> taskList = TaskMapper.getAllTasksPerUser(user.getUserId(), connectionPool);
             ctx.attribute("taskList", taskList);
             ctx.render("task.html");
-        }  catch (DatabaseException | NumberFormatException e) {
+        } catch (DatabaseException | NumberFormatException e) {
             ctx.attribute("message", e.getMessage());
             ctx.render("index.html");
         }
@@ -80,19 +82,20 @@ public class TaskController {
     private static void addtask(Context ctx, ConnectionPool connectionPool) {
 
         String taskName = ctx.formParam("taskname"); //Sikr dig at det passer på dit name i task.html!
-
-        if (taskName.length() > 3) {
-            try {
-                User user = ctx.sessionAttribute("currentUser");
+        User user = ctx.sessionAttribute("currentUser");
+        try {
+            if (taskName.length() > 3) {
                 Task newTask = TaskMapper.addTask(user, taskName, connectionPool);
-                List<Task> taskList = TaskMapper.getAllTasksPerUser(user.getUserId(), connectionPool);
-                ctx.attribute("taskList", taskList);
-                ctx.render("task.html");
-
-            } catch (DatabaseException e) {
-                ctx.attribute("message", "Noget gik galt. Prøv evt. igen!");
-                ctx.render("task.html");
+            } else {
+                ctx.attribute("message", "En task skal være længere end 3 tegn!");
             }
+            List<Task> taskList = TaskMapper.getAllTasksPerUser(user.getUserId(), connectionPool);
+            ctx.attribute("taskList", taskList);
+            ctx.render("task.html");
+
+        } catch (DatabaseException e) {
+            ctx.attribute("message", "Noget gik galt. Prøv evt. igen!");
+            ctx.render("task.html");
         }
     }
 }

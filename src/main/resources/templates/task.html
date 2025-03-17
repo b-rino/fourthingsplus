@@ -68,6 +68,8 @@
     </table>
 </form>
 
+<div><p class="error" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p></div>
+
 <p th:if="${session.currentUser != null}">  <!-- if-statement i html -->
     <a href="index.html" th:href="@{/logout}">Logout</a>
 </p> <!-- thymeleaf delen gør at den kommer ind forbi den route der hedder logout, som sletter credentials -->
